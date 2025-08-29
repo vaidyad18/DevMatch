@@ -1,13 +1,9 @@
 const express = require("express");
 const app = express();
-const User = require("./models/user");
-const { validateSignupData } = require("./utils/validate");
-const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken");
-const { userAuth } = require("./middlewares/auth");
 const authRouter = require("./routes/auth");
 const profileRouter = require("./routes/profile");
+const userRouter = require("./routes/user");
 const requestRouter = require("./routes/request");
 
 const connectDB = require("./config/database");
@@ -18,6 +14,7 @@ app.use(cookieParser());
 app.use("/",authRouter);
 app.use("/",profileRouter);
 app.use("/",requestRouter);
+app.use("/",userRouter);
 
 connectDB().then(() => {
   console.log("Database connected successfully");
