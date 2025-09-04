@@ -38,13 +38,13 @@ authRouter.post("/login", async (req, res) => {
     if (isPassordValid) {
       const token = await user.getJWT();
       res.cookie("token", token, { expires: new Date(Date.now() + 86400000)});
-      res.send("User logged in successfully");
+      res.send(user);
     } 
     else {
       throw new Error("Invalid login credentials");
     }
   } catch (err) {
-    res.status(400).send("Error logging in: " + err.message);
+    res.status(400).send( err.message);
   }
 });
 

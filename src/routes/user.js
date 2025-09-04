@@ -12,6 +12,10 @@ const USER_DATA=[
       "age",
       "photoURL",
       "gender",
+      "description",
+      "emailId",
+      "mobile",
+      
     ];
 
 userRouter.get("/user/requests/recieved", userAuth, async (req, res) => {
