@@ -1,8 +1,8 @@
-const express = require('express');
-const User = require('../models/user');
-const { validateSignupData } = require('../utils/validate');
+const express = require("express");
+const User = require("../models/user");
+const { validateSignupData } = require("../utils/validate");
 const authRouter = express.Router();
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 authRouter.post("/signup", async (req, res) => {
   try {
@@ -18,8 +18,13 @@ authRouter.post("/signup", async (req, res) => {
       emailId,
       password: hashPassword,
     });
-    await user.save();
-    res.send("User registered successfully");
+
+    const token = await user.getJWT();
+    res.cookie("token", token, { expires: new Date(Date.now() + 86400000) });
+    res.send(user);
+
+    const savedUser = await user.save();
+    res.json({message:"Success", data: savedUser});
   } catch (err) {
     res.status(400).send("Error registering user: " + err.message);
   }
@@ -37,14 +42,13 @@ authRouter.post("/login", async (req, res) => {
     const isPassordValid = await user.validatePassword(password);
     if (isPassordValid) {
       const token = await user.getJWT();
-      res.cookie("token", token, { expires: new Date(Date.now() + 86400000)});
+      res.cookie("token", token, { expires: new Date(Date.now() + 86400000) });
       res.send(user);
-    } 
-    else {
+    } else {
       throw new Error("Invalid login credentials");
     }
   } catch (err) {
-    res.status(400).send( err.message);
+    res.status(400).send(err.message);
   }
 });
 
@@ -54,4 +58,3 @@ authRouter.post("/logout", (req, res) => {
 });
 
 module.exports = authRouter;
-    
