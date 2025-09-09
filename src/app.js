@@ -5,11 +5,11 @@ const authRouter = require("./routes/auth");
 const profileRouter = require("./routes/profile");
 const userRouter = require("./routes/user");
 const requestRouter = require("./routes/request");
-const paymentRouter = require("./routes/payment");
 const cors = require("cors");
 require("dotenv").config();
 
 const connectDB = require("./config/database");
+const paymentRouter = require("./routes/payment");
 
 app.use(cors({
   origin:"http://localhost:5173",
