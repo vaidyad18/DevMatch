@@ -9,6 +9,7 @@ const cors = require("cors");
 require("dotenv").config();
 
 const connectDB = require("./config/database");
+const paymentRouter = require("./routes/payment");
 
 app.use(cors({
   origin:"http://localhost:5173",
@@ -21,6 +22,7 @@ app.use("/",authRouter);
 app.use("/",profileRouter);
 app.use("/",requestRouter);
 app.use("/",userRouter);
+app.use("/",paymentRouter);
 
 connectDB().then(() => {
   console.log("Database connected successfully");
