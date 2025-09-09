@@ -12,7 +12,7 @@ const connectDB = require("./config/database");
 const paymentRouter = require("./routes/payment");
 
 app.use(cors({
-  origin:"https://devmatch-io.vercel.app",
+  origin:"http://localhost:5173",
   credentials:true
 }));
 app.use(express.json());
