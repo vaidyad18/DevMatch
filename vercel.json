@@ -1,5 +1,13 @@
 {
-  "version": 2,
-  "builds": [{ "src": "src/app.js", "use": "@vercel/node" }],
-  "routes": [{ "src": "/(.*)", "dest": "src/app.js" }]
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob:; script-src 'self'; connect-src 'self' https://devmatch-backend.vercel.app; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+        }
+      ]
+    }
+  ]
 }
