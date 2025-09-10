@@ -1,4 +1,5 @@
 require('dotenv').config();
+console.log('Has RAZORPAY_KEY_ID?', !!process.env.RAZORPAY_KEY_ID);
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
