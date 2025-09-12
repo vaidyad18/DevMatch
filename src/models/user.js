@@ -73,7 +73,7 @@ const userSchema = new mongoose.Schema(
     skills: {
       type: [String],
     },
-    isPremimum: {
+    isPremium: {
       type: Boolean,
       default: false,
     },
