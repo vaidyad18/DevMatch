@@ -20,11 +20,11 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/api/",authRouter);
-app.use("/api/",profileRouter);
-app.use("/api/",requestRouter);
-app.use("/api/",userRouter);
-app.use("/api/",paymentRouter);
+app.use("/",authRouter);
+app.use("/",profileRouter);
+app.use("/",requestRouter);
+app.use("/",userRouter);
+app.use("/",paymentRouter);
 
 connectDB().then(() => {
   console.log("Database connected successfully");
