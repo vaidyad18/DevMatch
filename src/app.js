@@ -8,16 +8,18 @@ const userRouter = require("./routes/user");
 const requestRouter = require("./routes/request");
 const cors = require("cors");
 
-
+const http = require('http')
 const connectDB = require("./config/database");
 const paymentRouter = require("./routes/payment");
+const initializeSocketConnection = require('./utils/socket');
 
 app.use(cors({
   origin:"http://localhost:5173",
   credentials:true
 }));
 
-app.use('/payment/webhook', express.raw({ type: 'application/json' }));
+const server = http.createServer(app);
+initializeSocketConnection(server);
 
 app.use(express.json());
 app.use(cookieParser());
@@ -30,7 +32,7 @@ app.use("/",paymentRouter);
 
 connectDB().then(() => {
   console.log("Database connected successfully");
-  app.listen(7777, () => {
+  server.listen(7777, () => {
     console.log("Server is running on port 7777");
   });
 });
