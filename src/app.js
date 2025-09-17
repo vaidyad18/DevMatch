@@ -12,6 +12,7 @@ const http = require('http')
 const connectDB = require("./config/database");
 const paymentRouter = require("./routes/payment");
 const initializeSocketConnection = require('./utils/socket');
+const chatRouter = require('./routes/chat');
 
 app.use(cors({
   origin:"http://localhost:5173",
@@ -29,6 +30,7 @@ app.use("/",profileRouter);
 app.use("/",requestRouter);
 app.use("/",userRouter);
 app.use("/",paymentRouter);
+app.use("/",chatRouter);
 
 connectDB().then(() => {
   console.log("Database connected successfully");
