@@ -40,7 +40,8 @@ const userSchema = new mongoose.Schema(
     },
     age: {
       type: Number,
-      min: 18,
+      required: true,
+      min: 15,
     },
     mobile: {
       type: Number,
@@ -49,6 +50,7 @@ const userSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
+      required: true,
       validate(value) {
         if (!["Male", "Female", "Other"].includes(value)) {
           throw new Error("No a valid gender");
@@ -67,11 +69,48 @@ const userSchema = new mongoose.Schema(
     },
     description: {
       type: String,
+      required: true,
       maxlength: 200,
       default: "Hey there! I am using DevMatch.",
     },
     skills: {
+      required: true,
       type: [String],
+    },
+    role: {
+      type: String,
+      required: true,
+      default: "Student",
+    },
+    experience:{
+      type: String,
+      required: true,
+      default: "Fresher",
+      enum: ['Fresher', 'Beginner', 'Intermediate', 'Advanced'],
+    },
+    linkedin: {
+      type: String,
+      validate(value) {
+        if (value && !validator.isURL(value)) {
+          throw new Error("Not a valid URL");
+        }
+      }
+    },
+    github: {
+      type: String,
+      validate(value) {
+        if (value && !validator.isURL(value)) {
+          throw new Error("Not a valid URL");
+        }
+      }
+    },
+    website:{
+      type: String,
+      validate(value) {
+        if (value && !validator.isURL(value)) {
+          throw new Error("Not a valid URL");
+        }
+      }
     },
     isPremium: {
       type: Boolean,
